@@ -1,0 +1,66 @@
+# Ignore all files by default, but scan all directories
+*
+!*/
+
+# Keep .git and related metadata
+!/.git*
+!/.gitattributes
+
+# Keep Unreal Project file
+!/*.uproject
+
+# Keep essential source and config folders
+!/Source/**
+!/Config/**
+!/Plugins/**
+
+# Keep Visual Studio configuration file
+!/.vsconfig
+
+# Allow only .uasset and .umap files from /Content
+# (These should be tracked via Git LFS)
+!/Content/**/*.uasset
+!/Content/**/*.umap
+
+# Allow all files in /RawContent (e.g., original art/audio assets)
+!/RawContent/**/*
+
+# Exclude autosaves and backups
+/Content/**/Autosaves/**
+/Content/**/Backup/**
+
+/Binaries/**
+/DerivedDataCache/**
+/Intermediate/**
+/Saved/**
+
+# Plugin build artifacts
+/Plugins/**/Binaries/**
+/Plugins/**/Intermediate/**
+
+# Visual Studio
+.vs/
+*.VC.db
+*.VC.opendb
+
+# Visual Studio Code
+.vscode/
+
+# Windows
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Vim
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# Logs
+*.log
+*.tlog
+
+# Crash reports or temporary dumps
+*.dmp
