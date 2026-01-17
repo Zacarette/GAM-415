@@ -22,9 +22,33 @@ class Afirstperson415Projectile : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
 
+	// Reference to ball mesh
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* ballMesh;
+
+	// Base material
+	UPROPERTY(EditAnywhere)
+		UMaterial* baseMat;
+	
+	// Random Color
+	UPROPERTY()
+		FLinearColor randColor;
+
+	// Projectile mat
+	UPROPERTY(EditAnywhere)
+		UMaterialInterface* projMat;
+
+	// DMI mat
+	UPROPERTY()
+		UMaterialInstanceDynamic* dmiMat;
+
 public:
 	Afirstperson415Projectile();
 
+private:
+	virtual void BeginPlay();
+
+public:
 	/** called when projectile hits something */
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
@@ -34,4 +58,3 @@ public:
 	/** Returns ProjectileMovement subobject **/
 	UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
 };
-
