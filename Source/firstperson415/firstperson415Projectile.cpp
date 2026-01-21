@@ -6,6 +6,9 @@
 #include "Components/DecalComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/SphereComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
+
 
 Afirstperson415Projectile::Afirstperson415Projectile() 
 {
@@ -70,6 +73,18 @@ void Afirstperson415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Othe
 	// If there is another actor
 	if (OtherActor != nullptr)
 	{
+		// If colorP is set check
+		if (colorP)
+		{
+			// Spawn particle effect and setup random color
+			UNiagaraComponent* particleComp = UNiagaraFunctionLibrary::SpawnSystemAttached(colorP, HitComp, NAME_None, FVector(-20.f, 0.f, 0.f), FRotator(0.f), EAttachLocation::KeepRelativeOffset, true);
+			particleComp->SetNiagaraVariableLinearColor(FString("RandColor"), randColor);
+			// Destroy ball mesh
+			ballMesh->DestroyComponent();
+			// Set Collision to none
+			CollisionComp->BodyInstance.SetCollisionProfileName("NoCollision");
+		}
+
 		// Get frameNum for splatter
 		float frameNum = UKismetMathLibrary::RandomFloatInRange(0.f, 3.f);
 		
