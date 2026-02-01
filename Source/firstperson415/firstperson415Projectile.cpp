@@ -8,6 +8,7 @@
 #include "Components/SphereComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "PerlinProcTerrain.h"
 
 
 Afirstperson415Projectile::Afirstperson415Projectile() 
@@ -104,5 +105,12 @@ void Afirstperson415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Othe
 		MatInstance->SetVectorParameterValue("Color", randColor);
 		// Use frameNum (0-3) to set parameter
 		MatInstance->SetScalarParameterValue("Frame", frameNum);
+
+		APerlinProcTerrain* procTerrain = Cast<APerlinProcTerrain>(OtherActor);
+
+		if (procTerrain)
+		{
+			procTerrain->AlterMesh(Hit.ImpactPoint);
+		}
 	}
 }
